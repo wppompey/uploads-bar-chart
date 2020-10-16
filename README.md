@@ -1,5 +1,5 @@
 # Uploads bar chart 
-![banner](https://raw.githubusercontent.com/bobbingwide/uploads-bar-chart/master/assets/uploads-bar-chart-banner-772x250.jpg)
+![banner](https://raw.githubusercontent.com/bobbingwide/uploads-bar-chart/main/assets/uploads-bar-chart-banner-772x250.jpg)
 * Contributors:      AndrewLeonard, bobbingwide
 * Tags:              uploads, bar, chart
 * Requires at least: 5.5.1
