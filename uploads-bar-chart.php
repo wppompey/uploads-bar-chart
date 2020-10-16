@@ -16,8 +16,9 @@
 /* start of code added 18/06/2020 by Andrew Leonard to create a child theme*/
 function mychildtheme_enqueue_styles() {
 	$parent_style = 'parent-style';
-	wp_enqueue_style( 'chart-style', 'https://www.andrew-leonard.co.uk/Chart/Tooltip.css' );
-	wp_enqueue_style( 'chart-extra-style', 'https://www.andrew-leonard.co.uk/Chart/Extra.css' );
+	//wp_enqueue_style( 'chart-style', 'https://www.andrew-leonard.co.uk/Chart/Tooltip.css' );
+	wp_enqueue_style( 'uploads-bar-chart-tooltip-style', plugin_dir_url( __FILE__) . 'Chart/Tooltip.css' );
+	wp_enqueue_style( 'uploads-bar-chart-extra-style', plugin_dir_url( __FILE__) . 'Chart/Extra.css' );
 	wp_enqueue_style( 'chartist-style', 'https://cdnjs.cloudflare.com/ajax/libs/chartist/0.10.1/chartist.min.css' );
 }
 add_action( 'wp_enqueue_scripts', 'mychildtheme_enqueue_styles' );
@@ -44,11 +45,11 @@ svg.ct-chart-line, svg.ct-chart-line g.ct-labels, svg.ct-chart-line g.ct-labels 
 
 
 
-function upload_stats  ()
+function upload_stats( $height = '500px')
 {
 #print_r (wp_upload_dir());
 	$array=wp_upload_dir();
-	$root= $array[basedir];
+	$root= $array['basedir'];
 	$dirs = scandir($root);
 	$labels=null;
 	$series=null;
@@ -92,9 +93,7 @@ function upload_stats  ()
 	$tick="'";
 	$comma=",";
 	$series1="";
-	$series2="";
-	$series3="";
-	$bit1="{meta: ";
+		$bit1="{meta: ";
 	$bit2=",value: ";
 	$bit3="}";
 	$newline="<br>\n";
@@ -115,12 +114,60 @@ function upload_stats  ()
 			}
 		}
 	}
-	$Data="var chart=new Chartist.Bar('.ct-chart',{labels:[".$Date."],series:[[".$series1."]]},{fullWidth:true,width:'100%',height:'700px',chartPadding:{right:50,left:50},plugins:[Chartist.plugins.tooltip(),Chartist.plugins.legend({legendNames:['MBs'],})]});";
-	echo "<h1 style=\"text-align:center;\">Upload File Statistics</h1>";
-	echo "<div class=\"ct-chart\"></div>";
-	echo "<script>";
-	echo $Data;
-	echo "</script>";
+
+	$Data = uploads_bar_chart_javascript( $Date, $series1, $height) ;
+
+	//$Data="var chart=new Chartist.Bar('.ct-chart',{labels:[".$Date."],series:[[".$series1."]]},{fullWidth:true,width:'100%',height:'700px',
+	//chartPadding:{right:50,left:50},plugins:[Chartist.plugins.tooltip(),Chartist.plugins.legend({legendNames:['MBs'],})]});";
+	//echo "<h1 style=\"text-align:center;\">Upload File Statistics</h1>";
+	//echo "<div class=\"ct-chart\"></div>";
+	//echo "<script>";
+	//echo $Data;
+	//echo "</script>";
+	return $Data;
 }
-add_shortcode( 'upload_stats', 'upload_stats');
+
+function upload_stats_shortcode( $atts, $content, $tag ) {
+	$html = "";
+	$height = isset( $atts['height']) ? $atts['height'] : "350px";
+
+	$html .= uploads_bar_chart_chart( $height );
+	return $html;
+}
+
+
+function uploads_bar_chart_chart( $height ) {
+
+	//$html =count( $lines );
+	$html = "<div class=\"ct-chart\"></div>";
+	$script = upload_stats( $height );
+	$html .= uploads_bar_chart_chart_inline_script(  $script );
+	return $html;
+}
+
+function uploads_bar_chart_chart_inline_script( $script  ) {
+	$html = '<script type="text/javascript">';
+	$html .= $script;
+	$html .= '</script>';
+	return $html;
+}
+
+
+
+
+function uploads_bar_chart_javascript( $Date, $series1, $height = '500px') {
+
+	$Data = "var chart=new Chartist.Bar('.ct-chart',{labels:[";
+	$Data .= $Date;
+	$Data .=  '],';
+	$Data .= 'series:[[';
+	$Data .= $series1;
+	$Data .= ']]},';
+	$Data .= "{fullWidth:true,width:'100%',height:'";
+	$Data .= $height;
+	$Data .= "',chartPadding:{right:0,left:0},";
+	$Data .= "plugins:[Chartist.plugins.tooltip(),Chartist.plugins.legend({legendNames:['MBs'],})]});";
+	return $Data;
+}
+add_shortcode( 'upload_stats', 'upload_stats_shortcode');
 
