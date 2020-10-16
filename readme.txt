@@ -1,21 +1,20 @@
-# Uploads bar chart 
-![banner](https://raw.githubusercontent.com/bobbingwide/uploads-bar-chart/master/assets/uploads-bar-chart-banner-772x250.jpg)
-* Contributors:      AndrewLeonard, bobbingwide
-* Tags:              uploads, bar, chart
-* Requires at least: 5.5.1
-* Tested up to:      5.5.1
-* Stable tag:        0.0.0
-* Requires PHP:      7.2.0
-* License:           GPL-2.0-or-later
-* License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+=== Uploads bar chart ===
+Contributors:      AndrewLeonard, bobbingwide
+Tags:              uploads, bar, chart
+Requires at least: 5.5.1
+Tested up to:      5.5.1
+Stable tag:        0.0.0
+Requires PHP:      7.2.0
+License:           GPL-2.0-or-later
+License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
  Displays disk usage for wp-content uploads folders
 
-## Description 
+== Description ==
 The Uploads bar chart plugin displays a bar chart of the disk usage of files in your WordPress Uploads folder.
 It's implemented as a shortcode called [upload_stats]
 
-## Installation 
+== Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/uploads-bar-chart` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
@@ -32,17 +31,17 @@ With WordPress 5.5 or Gutenberg 9.0.0 or higher, and the authority to install pl
 1. And the block will be inserted into your content.
 
 
-## Screenshots 
+== Screenshots ==
 1.
 
 
-## Upgrade Notice 
-# 0.0.0 
+== Upgrade Notice ==
+= 0.0.0 = 
 First version as a plugin.
 
 
-## Changelog 
-# 0.0.0 
+== Changelog ==
+= 0.0.0 = 
 * Added: Added plugin to deliver [upload_stats] shortcode.
 * Tested: With WordPress 5.5.1
 * Tested: With PHP 7.3 and PHP 7.4
