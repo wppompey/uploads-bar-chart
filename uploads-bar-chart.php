@@ -1,5 +1,17 @@
 <?php
+/**
+ * Plugin Name:     Uploads bar chart
+ * Plugin URI: 		https://github.com/wppompey/uploads-bar-chart
+ * Description:     Displays disk usage for wp-content uploads folders
+ * Version:         0.0.0
+ * Author:          AndrewLeonard, bobbingwide
 
+ * License:         GPL-2.0-or-later
+ * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:     uploads-bar-chart
+ *
+ * @package         uploads-bar-chart
+ */
 
 /* start of code added 18/06/2020 by Andrew Leonard to create a child theme*/
 function mychildtheme_enqueue_styles() {
